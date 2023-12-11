@@ -25,17 +25,21 @@ Cubicle allows administrators to create and assign performance reviews to employ
 Follow these steps to set up Cubicle on your local machine:
 
 1. **Clone the Repository**:
+
    ```
    git clone https://github.com/KaranveerManhas/cubicle.git
    ```
 2. **Install dependencies**:
-```
-cd cubicle
-npm install
-```
+
+    ```
+    cd cubicle
+    npm install
+    ```
 3. **Setup Environment variables**:
+
     - Create a `.env` file in the root directory of the project.
     - Add the following environment variables with appropriate values:
+
     ```
     MONGODB_URI="your_value_here"
     SESSION_NAME = "your_value_here"
@@ -44,10 +48,12 @@ npm install
 
     ```
 4. **Run the Application**:
+
     ```
     npm start
     ```
 5. **Access the Application**:
+
     Open your browser and navigate to `https://localhost:2000` to access Cubicle.
 
 ## Contributing
