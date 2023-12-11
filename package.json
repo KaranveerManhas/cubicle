@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
-    "install": "npm install express express-ejs-layouts ejs mongoose connect-flash connect-mongo express-session node-sass-middleware"
+    "install": "npm install express express-ejs-layouts ejs mongoose connect-flash connect-mongo express-session node-sass-middleware passport passport-local"
   },
   "author": "Karanveer Singh",
   "license": "ISC",
