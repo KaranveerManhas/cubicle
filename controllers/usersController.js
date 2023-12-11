@@ -2,7 +2,7 @@ const Review = require('../models/review');
 const User = require('../models/user');
 
 // Secret Password for Admin Privileges
-const adminSecretPass = 'manhas';
+const adminSecretPass = process.env.ADMIN_SECRET_PASS;
 
 // Sign in Page Module
 module.exports.signIn = function (req, res){

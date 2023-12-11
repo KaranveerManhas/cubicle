@@ -35,8 +35,8 @@ app.set('views', './views');
 
 // Mongo store is used to store session cookie in database
 app.use(session({
-    name: 'emprs',
-    secret: 'manhas',
+    name: process.env.SESSION_NAME,
+    secret: process.env.SESSION_SECRET,
     saveUninitialized: false,
     resave: false,
     cookie: { 

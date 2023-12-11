@@ -1,6 +1,6 @@
 # Cubicle: Employee Review System
 
-Cubicle is an employee review system designed to streamline the process of assigning performance reviews and providing constructive feedback to employees. This web-based application offers a user-friendly interface for administrators, managers, and employees to manage and track performance evaluations.
+Cubicle is an employee review system designed to streamline the process of assigning performance reviews and providing constructive feedback to employees. This web-based application offers a user-friendly interface for administrators, and employees to manage and track performance evaluations.
 
 ## Features
 
@@ -9,29 +9,16 @@ Cubicle is an employee review system designed to streamline the process of assig
 Cubicle supports multiple user roles to ensure a secure and organized review process:
 
 - **Administrator**: Has full control over the system, including user management and access to all reviews.
-- **Employee**: Can view and respond to their performance reviews.
+
+- **Employee**: Can view their performance reviews, and give feedback on other's performance.
 
 ### 2. Performance Reviews
 
 Cubicle allows administrators to create and assign performance reviews to employees. Key features include:
 
-- **Customizable Review Criteria**: Define specific criteria for performance evaluation tailored to your organization's needs.
-- **Due Dates**: Set deadlines for completion to ensure a timely review process.
-- **Automated Reminders**: Send automated reminders to reviewers and reviewees to complete the evaluations on time.
+- **Assign Review**: Assign an employee to another employee's performance review.
+- **Provide Feedback**: Administrator can provide feedback on any employee. Employees can only give feedback for employees which they are assigned.
 
-### 3. Feedback and Comments
-
-Facilitate effective communication between managers and employees through:
-
-- **Comment Threads**: Each review includes a threaded discussion for detailed feedback and clarification.
-- **Private Notes**: Managers can add private notes for internal reference, ensuring transparency without compromising confidentiality.
-
-### 4. Analytics and Reporting
-
-Gain insights into employee performance and the review process through:
-
-- **Performance Metrics**: Track and analyze performance trends based on review scores and feedback.
-- **Exportable Reports**: Generate customizable reports for further analysis or compliance purposes.
 
 ## Getting Started
 
@@ -41,3 +28,30 @@ Follow these steps to set up Cubicle on your local machine:
    ```
    git clone https://github.com/KaranveerManhas/cubicle.git
    ```
+2. **Install dependencies**:
+```
+cd cubicle
+npm install
+```
+3. **Setup Environment variables**:
+    - Create a `.env` file in the root directory of the project.
+    - Add the following environment variables with appropriate values:
+    ```
+    MONGODB_URI="your_value_here"
+    SESSION_NAME = "your_value_here"
+    SESSION_SECRET = "your_value_here"
+    ADMIN_SECRET_PASS = "your_value_here"
+
+    ```
+4. **Run the Application**:
+    ```
+    npm start
+    ```
+5. **Access the Application**:
+    Open your browser and navigate to `https://localhost:2000` to access Cubicle.
+
+## Contributing
+Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
+
+## License
+This project is licensed under the terms of the [MIT](http://opensource.org/licenses/mit-license) license.
