@@ -1,0 +1,21 @@
+<link rel="stylesheet" href="/css/profile.css">
+
+
+<div class="d-flex justify-content-center m-5 flex-grow-1 bg-body rounded-3 align-items-center main-inner">
+    <form action="/users/update/<%= locals.user._id %>" method="post" class="d-flex flex-column justify-content-center">
+        <h2 class="mb-4 text-center">Profile</h2>
+        <div class="mb-3">
+            <label for="name" class="form-label">User Name</label>
+            <input type="text" name="name" class="form-control" id="name" aria-describedby="name" value="<%= locals.user.name %>">
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email address</label>
+          <input type="email" name="email" class="form-control" id="email" aria-describedby="email" value="<%= locals.user.email %>">
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" name="password" class="form-control" id="password" value="<%= locals.user.password %>">
+        </div>
+        <button type="submit" class="btn btn-outline-success">Update</button>
+    </form>
+</div>

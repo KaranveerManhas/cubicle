@@ -1,0 +1,6 @@
+.main-inner {
+  border: none !important;
+}
+.main-inner > div {
+  width: 400px;
+}/*# sourceMappingURL=user_sign_in.css.map */

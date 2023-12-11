@@ -1,0 +1,73 @@
+<link rel="stylesheet" href="/css/emp_view.css">
+
+<div class="d-flex flex-column py-5 px-4 bg-body-tertiary h-100"  id="main">
+    <!-- Reviews Header -->
+    <div class="d-flex justify-content-between flex-grow-1 bg-body p-3 pb-4 rounded-3 main-inner">
+        <div class="w-100">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="employeeLogin">
+                  <button class="nav-link link-success active" id="review-pending-tab" data-bs-toggle="tab" data-bs-target="#reviews-pending" type="button" role="tab" aria-controls="reviews-pending" aria-selected="true">Pending Reviews</button>
+                </li>
+                <li class="nav-item" role="adminLogin">
+                  <button class="nav-link link-success" id="self-reviews-tab" data-bs-toggle="tab" data-bs-target="#self-reviews" type="button" role="tab" aria-controls="self-reviews" aria-selected="false">Self Reviews</button>
+                </li>
+            </ul>
+              
+              <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane active" id="reviews-pending" role="tabpanel" aria-labelledby="reviews-pending-tab" tabindex="0">
+                    <div class="d-flex mt-4 p-2">
+                      <% if(user.assignedReviews) { %>
+                        <% for(review of user.assignedReviews) { %>
+                          <div class="review-card d-flex flex-column align-items-center bg-body-tertiary p-4 rounded-3">
+                            <img src="/images/profile.webp" alt="user_avatar" width="100">
+                            <p class="mt-2 fs-4"><%= review.name %></p>
+                            <p class="d-inline-flex gap-1">
+                              <a class="btn btn-outline-success" data-bs-toggle="collapse" href="#review-form" role="button" aria-expanded="false" aria-controls="review-collapse">
+                                Review
+                              </a>
+                            </p>
+                            <div class="collapse review-form" id="review-form">
+                              <div class="card card-body">
+                                <form action="/users/emp/create-review" method="post">
+                                  <div class="mb-3">
+                                    <input type="text" value="<%= locals.user._id %>" class="d-none" name="reviewer">
+                                    <input type="text" value="<%= review._id %>" class="d-none" name="reviewee">
+                                    <label for="review-textarea-<%= review._id %>" class="form-label">Provide feedback:</label>
+                                    <textarea name="review" class="form-control" id="review-textarea-<%= review._id %>" cols="25" rows="4"></textarea>
+                                  </div>
+                                  <button type="submit" class="btn btn-outline-success">Submit</button>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                        <% } %>
+                      <% }else{ %>
+                        <div class="d-flex justify-content-center align-items-center flex-grow-1">
+                          <p class="fs-5">No reviews assigned</p>
+                        </div>
+                      <% } %>
+                    </div>
+                </div>
+                <div class="tab-pane" id="self-reviews" role="tabpanel" aria-labelledby="all-reviews-tab" tabindex="0">
+                  <div class="d-flex mt-4 p-2">
+                    <% if(user.selfReviews.length > 0){ %>
+                      <% for(review of user.selfReviews) { %>
+                        <div class="review-card d-flex flex-column align-items-center bg-body-tertiary p-4 rounded-3">
+                          <img src="/images/profile.webp" alt="user_avatar" width="100">
+                          <p class="mt-2 fs-4"><%= review.reviewer.name %></p>
+                          <i>said - </i>
+                          <i><q><%= review.review %></q></i>
+                        </div>
+                      <% } %>
+                    <% }else{ %>
+                      <div class="d-flex justify-content-center align-items-center flex-grow-1">
+                        <p class="fs-5">You haven't been reviewed yet</p>
+                      </div>
+                    <% } %>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

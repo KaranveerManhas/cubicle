@@ -1,0 +1,39 @@
+<link rel="stylesheet" href="/css/user_sign_up.css">
+
+
+<div class="d-flex justify-content-center m-5 flex-grow-1 bg-body rounded-3 align-items-center main-inner">
+    <form action="/users/create" method="post">
+        <h2 class="mb-5 text-center">Sign Up</h2>
+        <div class="mb-3">
+            <label for="name" class="form-label">Full Name</label>
+            <input type="text" name="name" class="form-control" id="name" aria-describedby="name">
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email address</label>
+          <input type="email" name="email" class="form-control" id="email" aria-describedby="email">
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" name="password" class="form-control" id="password">
+        </div>
+        <div class="mb-3">
+            <label for="admin-selector" class="form-label">Are you an admin?</label>
+            <select class="form-select" name="isAdmin" aria-label="Admin Privileges Select" id="admin-selector">
+                <option value="false">No</option>
+                <option value="true">Yes</option>
+            </select>
+        </div>
+        <div class="mb-3 d-none" id="admin-password-box">
+            <label for="secret-password" class="form-label">Enter secret password for Admin access</label>
+            <input type="password" name="admin_password" class="form-control" id="secret-password" aria-describedby="Admin Secret password">
+        </div>
+        <button type="submit" class="btn btn-outline-success mb-3">Sign Up</button>
+        <div class="mb-3">
+            <p>Already Registered? 
+                <a href="/users/sign-in" class="link-success text-decoration-none">Sign In here</a>
+            </p>
+        </div>
+    </form>
+</div>
+
+<script src="/js/user_sign_up.js"></script>

@@ -1,0 +1,5 @@
+.review-card {
+  width: 300px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); }
+  .review-card textarea {
+    resize: none; }

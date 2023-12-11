@@ -1,0 +1,36 @@
+<div class="col-auto col-md-2 col-xl-2 px-sm-1 px-0 bg-dark" id="side-menu">
+    <div class="d-flex flex-column align-items-center align-items-sm-start px-2 pt-2 text-white min-vh-100">
+        <a href="/" class="d-flex align-items-center pb-2 mb-md-0 me-md-auto link-light text-decoration-none">
+            <img src="/images/cubicle.webp" alt="Cubicle_Logo" class="logo me-1" width="30" height="30">
+            <h2 class="ms-1 mt-2 d-none d-sm-block">CUBICLE</h2>
+        </a>
+        <ul class="nav nav-pills flex-column mb-sm-auto mt-5 mb-0 align-items-start" id="menu">
+            <li class="nav-item">
+                <a href="/" class="nav-link link-light align-middle px-0 text-decoration-none d-flex align-items-center">
+                    <i class='fs-4 bx bx-home-alt'></i><span class="ms-2 d-none d-sm-inline">Dashboard</span>
+                </a>
+            </li>
+        </ul>
+        <hr>
+        <% if (locals.user){ %>
+            <div class="dropdown pb-4">
+                <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle text-wrap" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="/images/profile.webp" alt="user_avatar" width="60" height="60" class="rounded-circle">
+                    <h6 class="d-none text-wrap text-break d-sm-inline mx-2"><%= locals.user.name %></h6>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                    <li><a class="dropdown-item" href="/users/profile">Profile</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="/users/sign-out">Sign out</a></li>
+                </ul>
+            </div>
+        <% }else{ %>
+            <div class=" pb-4 d-flex flex-column">
+                <a href="/users/sign-in" class="btn btn-outline-light login-options" role="button">Sign In</a>
+                <a href="/users/sign-up" class="btn btn-outline-light mt-3 login-options" role="button">Sign Up</a>
+            </div>
+        <% } %>
+    </div>
+</div>

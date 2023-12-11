@@ -1,0 +1,10 @@
+@keyframes slide-up {
+  0% {
+    transform: translateY(1000px); }
+  100% {
+    transform: translateY(0px); } }
+
+.list-item {
+  height: 170px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  animation: slide-up 1s ease-in; }

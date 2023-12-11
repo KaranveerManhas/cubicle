@@ -1,0 +1,26 @@
+{
+  "name": "cubicle",
+  "version": "1.0.0",
+  "description": "An employee review system",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "install": "npm install express express-ejs-layouts ejs mongoose connect-flash connect-mongo express-session node-sass-middleware"
+  },
+  "author": "Karanveer Singh",
+  "license": "ISC",
+  "dependencies": {
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^5.1.0",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.3.1",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-ejs-layouts": "^2.5.1",
+    "express-session": "^1.17.3",
+    "mongoose": "^8.0.2",
+    "node-sass-middleware": "^1.1.0",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0"
+  }
+}

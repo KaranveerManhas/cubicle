@@ -1,0 +1,249 @@
+ <link rel="stylesheet" href="/css/admin_view.css">
+<!-- Main Container -->
+<div class="d-flex flex-column py-5 px-4 bg-body-tertiary h-100"  id="main">
+  <!-- Employee Header Starts-->
+  <div class="d-flex justify-content-between flex-grow-1 bg-body p-3 pb-4 rounded-3 main-inner">
+    <!-- Nav Tab Wrapper starts -->
+    <div class="w-100">
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="employeeView">
+          <button class="nav-link link-success active" id="employees-tab" data-bs-toggle="tab" data-bs-target="#employees" type="button" role="tab" aria-controls="employee-view" aria-selected="true">Employees</button>
+        </li>
+        <li class="nav-item" role="reviews">
+          <button class="nav-link link-success" id="all-reviews-tab" data-bs-toggle="tab" data-bs-target="#all-reviews" type="button" role="tab" aria-controls="all-reviews" aria-selected="false">Reviews</button>
+        </li>
+      </ul>
+      <!-- Tab contents start -->
+      <div class="tab-content">
+        <div class="tab-pane active" id="employees" role="tabpanel" aria-labelledby="employees-tab" tabindex="0">
+          <div class="d-flex mt-4 p-2">
+            <div class="d-flex justify-content-between w-100">
+              <h4>Employees</h4>
+              <!-- Add Employee Button trigger modal -->
+              <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#add-employee">
+                  Add Employee
+              </button>
+            
+              <!-- Add Employee Modal -->
+              <div class="modal fade" id="add-employee" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                          <h1 class="modal-title fs-5" id="staticBackdropLabel">Add an Employee</h1>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                      <form action="/users/admin/create-user" method="post">
+                        <div class="mb-3">
+                            <label for="name-input" class="form-label">Employee Name</label>
+                            <input type="text" name="name" class="form-control" id="name-input" aria-describedby="employeeName">
+                          </div>
+                        <div class="mb-3">
+                          <label for="email-input" class="form-label">Email address</label>
+                          <input type="email" name="email" class="form-control" id="email-input" aria-describedby="employeeEmail">
+                        </div>
+                        <div class="mb-3">
+                          <label for="password-input" class="form-label">Password</label>
+                          <input type="password" name="password" class="form-control" id="password-input">
+                        </div>
+                        <div class="mb-3">
+                            <label for="admin-input" class="form-label">Grant Admin Privileges?</label>
+                            <select class="form-select" name="isAdmin" aria-label="admin-privilege-option">
+                                <option value='true' selected>Yes</option>
+                                <option value="false">No</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-outline-success">Create</button>
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <% for(uS of users){ %>
+            <!-- Employee List Item -->
+            <div class="d-flex flex-row justify-content-between bg-body-tertiary mt-3 p-3 w-100 rounded-3 list-item" id="emp-<%= uS._id %>">
+                <!-- Avatar and Employee Name -->
+              <div class="d-flex flex-row align-items-center w-50">
+                <img src="/images/profile.webp" alt="Employee_Avatar" class="img-fluid" width="120" height="120"/>
+                <h5 class="ms-2"><%= uS.name %></h6>
+              </div>
+              <!-- Employee options -->
+              <div class="d-flex flex-column justify-content-between">
+                  <!-- Review Employee -->
+                  <a class="btn btn-outline-success" href="#" data-bs-toggle="modal" data-bs-target="#review-employee-<%= uS._id %>" role="button">Assign Review</a>
+                  <div class="modal fade" id="review-employee-<%= uS._id %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Assign Review to Employee</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                              <form action="/users/admin/assign-review" method="post">
+                                  <div class="mb-3">
+                                    <label for="assignedTo" class="form-label">Assigned To</label>
+                                    <input type="text" value="<%= uS._id %>" class="d-none" name="reviewer">
+                                    <input type="text" value="<%= uS.name %>" class="form-control" id="assignedTo-<%= uS._id %>" disabled>
+                                  </div>
+                                  <div class="mb-3">
+                                      <label for="assignReview" class="form-label">Select employee whom you want the review for.</label>
+                                      <select class="form-select" name="reviewee" id="assignReview-<%= uS._id %>" aria-label="Employee Select Label">
+                                          <option selected disabled>Select Employee</option>
+                                          <% for(u of users){ %>
+                                            <<% if(u != uS){ %>
+                                              <option value="<%= u._id %>"><%= u.name %></option>
+                                            <% } %>
+                                          <% } %>
+                                      </select>
+                                  </div>
+                                  <button type="submit" class="btn btn-outline-success">Assign</button>
+                              </form>
+                            </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+                  <!-- Review Employee button ends -->
+                  <!-- Edit Employee button Starts -->
+                  <a class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#edit-employee-<%= uS._id %>" href="#" role="button">Edit Employee</a>
+                  <div class="modal fade" id="edit-employee-<%= uS._id %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Employee Details</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                              <form action="/admin/update-user" method="post">
+                                  <div class="mb-3">
+                                      <label for="employeeName" class="form-label">Employee Name</label>
+                                      <input type="text" name="name" value="<%= uS.name %>" class="form-control" id="employeeEmail-<%= uS._id %>" aria-describedby="employeeName">
+                                  </div>
+                                  <div class="mb-3">
+                                    <label for="employeeEmail" class="form-label">Employee Email address</label>
+                                    <input type="email" name="email" class="form-control" value="<%= uS.email %>" id="employeeEmail" aria-describedby="employeeEmail">
+                                  </div>
+                                  <div class="mb-3">
+                                    <label for="employeePassword" class="form-label">Employee Password</label>
+                                    <input type="password" name="password" class="form-control" value="<%= uS.password %>" id="employeePassword">
+                                  </div>
+                                  <div class="mb-3">
+                                      <label for="admin-input" class="form-label">Admin Privileges</label>
+                                      <select class="form-select" name="isAdmin" aria-label="Default select example">
+                                          <option value="true" selected>Yes</option>
+                                          <option value="false">No</option>
+                                      </select>
+                                  </div>
+                                  <button type="submit" class="btn btn-outline-success">Submit</button>
+                                </form>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+                  <!-- Edit Employee ends -->
+                  <!-- Remove Employee starts -->
+                  <a class="btn btn-outline-danger" href="#" data-bs-toggle="modal" data-bs-target="#remove-employee-<%= user._id %>" role="button">Remove Employee</a>
+                  <div class="modal fade" id="remove-employee-<%= user._id %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Remove Employee</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                              Are you sure you want to remove this employee?
+                          </div>
+                          <div class="modal-footer">
+                              <a href="/users/delete/<%= user._id %>" class="btn btn-outline-danger remove-employee">Yes</a>
+                              <button class="btn btn-outline-success" data-bs-dismiss="modal">No</button>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+                  <!-- Remove Employee ends -->
+              </div>
+              <!-- Employee Options -->
+            </div>
+            <!-- Employee List Item ends -->
+          <% } %>
+        </div>
+        <!-- Employee Panel Ends -->
+        <!-- All Reviews Panel start -->
+        <div class="tab-pane" id="all-reviews" role="tabpanel" aria-labelledby="all-reviews-tab" tabindex="0">
+          <div class="d-flex flex-column mt-4 p-2">
+            <!-- All Reviews Header starts -->
+            <div class="d-flex justify-content-between w-100">
+              <h4>All Reviews</h4>
+              <!-- Add Employee Button trigger modal -->
+              <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#add-review">
+                  Add Review
+              </button>
+              
+              <!-- Add Employee Modal -->
+              <div class="modal fade" id="add-review" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Add a Review</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <form action="/users/admin/create-review" method="post" id="create-review-form">
+                        <div class="mb-3">
+                          <input type="text" value="<%= locals.user._id %>" class="d-none" name="reviewer">
+                          <select class="form-select" name="reviewee">
+                            <option disabled selected>Select an Employee</option>
+                            <% for(user of users){ %>
+                              <option value="<%= user._id %>"><%= user.name %></option>
+                            <% } %>
+                          </select>
+                        </div>
+                        <div class="mb-3">
+                          <label for="review-textarea-<%= locals.user._id %>" class="form-label">Provide feedback:</label>
+                          <textarea name="review" class="form-control" id="review-textarea-" cols="25" rows="4"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-outline-success">Submit</button>
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- All Reviews Header Ends -->
+            <!-- Reviews List Starts -->
+            <div class="d-flex mt-3 p-2 flex-wrap">
+              <!-- Review Cards -->
+              <% for(review of all_reviews){ %>
+                <div class="review-card d-flex flex-column align-items-center bg-body-tertiary p-4 m-1 rounded-3">
+                  <img src="/images/profile.webp" alt="user_avatar" width="100">
+                  <p class="mt-2 fs-4"><%= review.reviewee.name %></p>
+                  <i><%= review.reviewer.name %> said - </i>
+                  <i><q><%= review.review %></q></i>
+                </div>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      <!-- All Review Panel ends -->
+      </div>
+      <!-- Tab Contents Ends -->
+    </div>
+    <!-- Nav Tab Wrapper ends -->
+  </div>
+  <!-- Employee Header Ends -->
+</div>
+
+<script src="/js/admin_view.js"></script>

@@ -1,0 +1,4 @@
+.main-inner {
+  border: none !important; }
+  .main-inner > div {
+    width: 400px; }

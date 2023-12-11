@@ -1,0 +1,56 @@
+<link rel="stylesheet" href="/css/user_sign_in.css">
+
+<div class="d-flex justify-content-center m-5 flex-grow-1 align-items-center rounded-3 bg-body main-inner">
+    <div>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="employeeLogin">
+              <button class="nav-link link-success active" id="emp-tab" data-bs-toggle="tab" data-bs-target="#emp-login" type="button" role="tab" aria-controls="employee-login" aria-selected="true">Employee Sign In</button>
+            </li>
+            <li class="nav-item" role="adminLogin">
+              <button class="nav-link link-success" id="admin-tab" data-bs-toggle="tab" data-bs-target="#admin-login" type="button" role="tab" aria-controls="admin-login" aria-selected="false">Admin Sign In</button>
+            </li>
+          </ul>
+          
+          <!-- Tab panes -->
+        <div class="tab-content">
+            <div class="tab-pane active" id="emp-login" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                <form action="/users/emp/create-session" method="post">
+                    <h2 class="m-4 text-center">Employee Sign In</h2>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email address</label>
+                        <input type="email" name="email" class="form-control" id="email" aria-describedby="email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" name="password" class="form-control" id="password">
+                    </div>
+                    <button type="submit" class="btn btn-outline-success mb-3">Sign In</button>
+                    <div class="mb-3">
+                        <p>Haven't Registered Yet? 
+                            <a href="/users/sign-up" class="link-success text-decoration-none">Sign Up here</a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+            <div class="tab-pane" id="admin-login" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                <form action="/users/admin/create-session" method="post">
+                    <h2 class="m-4 text-center">Admin Sign In</h2>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email address</label>
+                        <input type="email" name="email" class="form-control" id="email" aria-describedby="email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" name="password" class="form-control" id="password">
+                    </div>
+                    <button type="submit" class="btn btn-outline-success mb-3">Sign In</button>
+                    <div class="mb-3">
+                        <p>Haven't Registered Yet? 
+                            <a href="/users/sign-up" class="link-success text-decoration-none">Sign Up here</a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
