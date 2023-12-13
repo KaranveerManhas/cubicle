@@ -152,8 +152,8 @@
                   </div>
                   <!-- Edit Employee ends -->
                   <!-- Remove Employee starts -->
-                  <a class="btn btn-outline-danger" href="#" data-bs-toggle="modal" data-bs-target="#remove-employee-<%= user._id %>" role="button">Remove Employee</a>
-                  <div class="modal fade" id="remove-employee-<%= user._id %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <a class="btn btn-outline-danger" href="#" data-bs-toggle="modal" data-bs-target="#remove-employee-<%= uS._id %>" role="button">Remove Employee</a>
+                  <div class="modal fade" id="remove-employee-<%= uS._id %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                       <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                           <div class="modal-header">
@@ -164,7 +164,7 @@
                               Are you sure you want to remove this employee?
                           </div>
                           <div class="modal-footer">
-                              <a href="/users/delete/<%= user._id %>" class="btn btn-outline-danger remove-employee">Yes</a>
+                              <a href="/users/delete/<%= uS._id %>" class="btn btn-outline-danger remove-employee">Yes</a>
                               <button class="btn btn-outline-success" data-bs-dismiss="modal">No</button>
                           </div>
                         </div>
