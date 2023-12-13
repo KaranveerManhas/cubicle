@@ -28,6 +28,7 @@ router.post('/admin/create-session', passport.authenticate(
 router.post('/admin/create-user', passport.checkAuthenticationAdmin, usersController.createUserAdmin);
 router.post('/admin/assign-review', passport.checkAuthenticationAdmin, usersController.assignReview);
 router.post('/admin/create-review', passport.checkAuthenticationAdmin, usersController.createReview);
+router.post('/admin/update-user/:id', passport.checkAuthenticationAdmin, usersController.update);
 // Sign out
 router.get('/sign-out', usersController.destroySession);
 

@@ -10,7 +10,7 @@ module.exports.home = function(req, res) {
 // Admin view
 module.exports.adminView = async function(req, res){
     try{
-
+        
         let users = await User.find({
             _id: {
                 $ne: req.user._id
