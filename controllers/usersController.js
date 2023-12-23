@@ -133,16 +133,18 @@ module.exports.deleteUser = async function(req, res){
 
         let user = await User.findByIdAndDelete(req.params.id);
         let allUsers = await User.find({});
+        let allReviews = await Review.deleteMany({
+            $or: [
+                {reviewee: user},
+                {reviewer: user}
+            ]
+        });
 
         for (us of allUsers){
-            if (us.reviewer.includes(req.params.id)){
-                us.reviewer.pull(req.params.id);
+            if (us.assignedReviews.includes(req.params.id)){
+                us.assignedReviews.pull(req.params.id);
+                await us.save();
             }
-            if(us.reviewee.includes(req.params.id)){
-                us.reviewee.pull(req.params.id);
-            }
-
-            await us.save();
         }
 
         return res.status(200).json({
