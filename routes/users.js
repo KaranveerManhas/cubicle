@@ -4,8 +4,8 @@ const usersController = require('../controllers/usersController');
 const passport = require('passport');
 
 // Common user routes
-router.get('/sign-in', usersController.signIn);
-router.get('/sign-up', usersController.signUp);
+router.get('/sign-in', passport.checkAuthentication, usersController.signIn);
+router.get('/sign-up', passport.checkAuthentication, usersController.signUp);
 router.get('/profile', passport.checkProfileAuthentication, usersController.profile);
 router.post('/update/:id', passport.checkProfileAuthentication, usersController.update);
 router.get('/delete/:id', passport.checkAuthenticationAdmin, usersController.deleteUser);

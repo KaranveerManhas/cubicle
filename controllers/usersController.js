@@ -132,6 +132,18 @@ module.exports.deleteUser = async function(req, res){
     try{
 
         let user = await User.findByIdAndDelete(req.params.id);
+        let allUsers = await User.find({});
+
+        for (us of allUsers){
+            if (us.reviewer.contains(req.params.id)){
+                us.reviewer.pull(req.params.id);
+            }
+            if(us.reviewee.contains(req.params.id)){
+                us.reviewee.pull(req.params.id);
+            }
+
+            await us.save();
+        }
 
         return res.status(200).json({
             message: 'User deleted successfully',

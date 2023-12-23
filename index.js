@@ -3,7 +3,9 @@ const app = express();
 const port = 2000;
 const dotenv = require('dotenv');
 dotenv.config();
+
 const cookieParser = require('cookie-parser');
+
 const db = require('./config/mongoose');
 const sassMiddleware = require('node-sass-middleware');
 const expressLayout = require('express-ejs-layouts');
@@ -23,7 +25,9 @@ app.use(sassMiddleware({
 }));
 
 app.use(express.urlencoded());
+
 app.use(cookieParser());
+
 app.use(express.static('./assets'));
 app.use(expressLayout);
 // Extract styles and scripts from subpages into the layout 
