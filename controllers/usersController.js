@@ -135,10 +135,10 @@ module.exports.deleteUser = async function(req, res){
         let allUsers = await User.find({});
 
         for (us of allUsers){
-            if (us.reviewer.contains(req.params.id)){
+            if (us.reviewer.includes(req.params.id)){
                 us.reviewer.pull(req.params.id);
             }
-            if(us.reviewee.contains(req.params.id)){
+            if(us.reviewee.includes(req.params.id)){
                 us.reviewee.pull(req.params.id);
             }
 
